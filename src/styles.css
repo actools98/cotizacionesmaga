@@ -1,48 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
 /* ============================================================
-   Design Tokens — MAGA Beauty
-   Tipografía: Inter (sans-serif geométrica)
-   Pesos: 400 (normal), 600 (medium), 700 (bold), 800 (extra bold), 900 (black)
+   Design Tokens — Tema "Lienxo" (editorial claro)
+   Inspirado en el portafolio: fondo crema, líneas finas,
+   tipografía Outfit (moderna y limpia).
    ============================================================ */
 :root {
-  /* Tipografía */
-  --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  --font-heading: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  --font-weight-normal: 400;
-  --font-weight-medium: 600;
-  --font-weight-bold: 700;
-  --font-weight-black: 800;
+  --color-bg-main: #FBFAF8;         /* blanco cálido, casi blanco */
+  --color-bg-surface: #FFFFFF;      /* superficies (cards, sidebar) */
+  --color-text-primary: #2B2A28;    /* casi negro cálido */
+  --color-text-secondary: #7A756C;  /* gris cálido */
+  --color-border: #E1DDD3;          /* línea fina crema-gris */
 
-  /* Colores */
-  --color-bg-main: #f8f8f8;
-  --color-bg-surface: #ffffff;
-  --color-text-primary: #111111;
-  --color-text-secondary: #666666;
-  --color-border: #e0e0e0;
-  --color-primary: #111111;
-  --color-primary-hover: #333333;
-  --color-primary-muted: #f0f0f0;
-  --color-success: #4CAF50;
-  --color-danger: #D32F2F;
+  --color-primary: #2B2A28;         /* negro cálido, actúa como acento */
+  --color-primary-hover: #4A4640;
+  --color-primary-muted: #F1EEE6;   /* fondo suave para selección */
+  --color-success: #6B8F71;         /* verde apagado */
+  --color-danger: #B5675A;          /* terracota apagado */
 
-  /* Espaciado */
+  --font-sans: 'Outfit', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Outfit', Georgia, serif;    /* Usamos Outfit también para títulos */
+  --font-mono: 'Outfit', 'JetBrains Mono', monospace; /* Opcional, mantén mono si prefieres */
+
   --text-h1: 2.4rem;
   --text-h2: 1.6rem;
   --text-body: 1rem;
   --text-small: 0.8rem;
-  --tracking-wide: 0.05em;
+  --tracking-wide: 0.12em;
+
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 1.5rem;
   --space-lg: 2rem;
   --space-xl: 3rem;
 
-  /* Sombras */
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --shadow-card: 0 1px 3px rgba(0,0,0,0.06);
-  --shadow-floating: 0 8px 24px -8px rgba(0,0,0,0.15);
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --shadow-card: none;
+  --shadow-floating: 0 8px 24px -8px rgba(43, 42, 40, 0.18);
 }
 
 /* ============================================================
@@ -56,13 +51,13 @@
 
 body {
   font-family: var(--font-sans);
-  font-weight: var(--font-weight-normal);
   background-color: var(--color-bg-main);
+  /* grano de papel orgánico (ruido feTurbulence), no una grilla repetitiva */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.16  0 0 0 0 0.15  0 0 0 0 0.13  0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
   color: var(--color-text-primary);
   line-height: 1.6;
   padding: var(--space-lg);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 @media (max-width: 768px) {
@@ -90,6 +85,7 @@ body {
   margin: 0 auto;
   padding: var(--space-lg);
   background-color: transparent;
+  border-radius: 0;
 }
 
 @media (max-width: 768px) {
@@ -107,7 +103,7 @@ header {
   align-items: center;
   margin-bottom: var(--space-lg);
   padding-bottom: var(--space-md);
-  border-bottom: 2px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
   flex-wrap: wrap;
   gap: var(--space-sm);
 }
@@ -119,11 +115,10 @@ header {
 }
 
 .logo .logo-img {
-  height: 44px;
+  height: 40px;      /* Ajusta según el tamaño deseado */
   width: auto;
   display: block;
 }
-
 .header-right {
   display: flex;
   align-items: center;
@@ -133,17 +128,16 @@ header {
 .btn-toggle {
   background-color: transparent;
   color: var(--color-text-primary);
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   padding: var(--space-xs) var(--space-md);
   border-radius: var(--radius-sm);
-  font-weight: var(--font-weight-bold);
+  font-weight: 500;
   font-size: var(--text-small);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s ease;
   min-height: 44px;
-  font-family: var(--font-sans);
 }
 
 .btn-toggle:hover {
@@ -153,7 +147,7 @@ header {
 }
 
 .btn-toggle:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 1px solid var(--color-primary);
   outline-offset: 2px;
 }
 
@@ -161,6 +155,10 @@ header {
   background-color: var(--color-primary);
   color: #FFFFFF;
   border-color: var(--color-primary);
+}
+
+.btn-toggle.active:hover {
+  filter: brightness(1.15);
 }
 
 .currency-selector {
@@ -171,11 +169,11 @@ header {
 #currency-select {
   font-family: var(--font-sans);
   font-size: var(--text-small);
-  font-weight: var(--font-weight-bold);
+  font-weight: 500;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   padding: var(--space-xs) var(--space-sm);
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   background-color: var(--color-bg-surface);
   color: var(--color-text-primary);
@@ -190,7 +188,7 @@ header {
 }
 
 #currency-select:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 1px solid var(--color-primary);
   outline-offset: 2px;
 }
 
@@ -233,9 +231,9 @@ header {
 /* Total Estimado */
 .summary-card {
   background: var(--color-bg-surface);
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
   padding: var(--space-md) var(--space-lg);
   display: flex;
   flex-direction: column;
@@ -243,9 +241,9 @@ header {
 }
 
 .summary-title {
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: var(--text-small);
-  font-weight: var(--font-weight-bold);
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
   color: var(--color-text-secondary);
@@ -253,9 +251,9 @@ header {
 }
 
 .total-amount {
-  font-family: var(--font-heading);
+  font-family: var(--font-serif);
   font-size: 3rem;
-  font-weight: var(--font-weight-black);
+  font-weight: 500;
   color: var(--color-text-primary);
   line-height: 1.2;
   word-break: break-word;
@@ -264,13 +262,91 @@ header {
 /* Portafolios */
 .portfolios-card {
   background: var(--color-bg-surface);
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
   padding: var(--space-md) var(--space-lg);
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+}
+
+.portfolios-dropdown {
+  margin-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-sm);
+}
+
+#portfolios-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.portfolio-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-bg-main);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+.portfolio-item .pf-name {
+  font-weight: 500;
+  font-size: var(--text-small);
+  letter-spacing: 0.02em;
+}
+
+.portfolio-item .pf-actions {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.portfolio-item .pf-actions button {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-size: var(--text-small);
+  padding: 0 var(--space-xs);
+  transition: color 0.2s ease;
+}
+
+.portfolio-item .pf-actions button:hover {
+  color: var(--color-text-primary);
+}
+
+.add-portfolio-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+.add-portfolio-form input {
+  flex: 1 1 120px;
+  height: 36px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0 var(--space-sm);
+  background: var(--color-bg-main);
+  color: var(--color-text-primary);
+  font-size: var(--text-small);
+  transition: border 0.2s ease;
+}
+
+.add-portfolio-form input:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+.add-portfolio-form .btn {
+  height: 36px;
+  font-size: var(--text-small);
+  padding: 0 var(--space-sm);
 }
 
 /* ============================================================
@@ -285,15 +361,15 @@ header {
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--space-sm);
-  border-bottom: 2px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
   padding-bottom: var(--space-xs);
 }
 
 .category-header h3 {
-  font-family: var(--font-heading);
+  font-family: var(--font-serif);
   font-size: var(--text-h2);
-  font-weight: var(--font-weight-black);
-  letter-spacing: -0.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-text-primary);
 }
@@ -309,12 +385,10 @@ header {
   font-size: var(--text-small);
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-bold);
 }
 
 .category-actions .btn-edit-cat {
@@ -359,9 +433,9 @@ header {
   align-items: center;
   padding: var(--space-sm) var(--space-md);
   background: var(--color-bg-surface);
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -376,8 +450,8 @@ header {
 }
 
 .module-card input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   accent-color: var(--color-primary);
   cursor: pointer;
   flex-shrink: 0;
@@ -385,7 +459,7 @@ header {
 }
 
 .module-card input[type="checkbox"]:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 1px solid var(--color-primary);
   outline-offset: 2px;
 }
 
@@ -393,22 +467,21 @@ header {
   flex: 1;
   margin-left: var(--space-sm);
   font-size: var(--text-body);
-  font-weight: var(--font-weight-bold);
+  font-weight: 500;
   color: var(--color-text-primary);
 }
 
 .module-card .module-price {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: var(--text-body);
   color: var(--color-text-secondary);
   transition: color 0.2s ease;
   white-space: nowrap;
-  font-weight: var(--font-weight-bold);
 }
 
 .module-card:has(input:checked) .module-price {
   color: var(--color-text-primary);
-  font-weight: var(--font-weight-black);
+  font-weight: 600;
 }
 
 /* ============================================================
@@ -436,12 +509,10 @@ header {
   font-size: var(--text-small);
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-bold);
 }
 
 .module-card .admin-actions .btn-edit {
@@ -490,13 +561,13 @@ header {
   padding: var(--space-sm);
   background: var(--color-bg-surface);
   border-radius: var(--radius-md);
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
 }
 
 #category-controls input {
   flex: 1 1 150px;
   height: 44px;
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: 0 var(--space-sm);
   font-family: var(--font-sans);
@@ -504,7 +575,6 @@ header {
   background-color: var(--color-bg-main);
   color: var(--color-text-primary);
   transition: border 0.2s ease;
-  font-weight: var(--font-weight-medium);
 }
 
 #category-controls input:focus {
@@ -513,15 +583,13 @@ header {
 }
 
 #category-controls input:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 1px solid var(--color-primary);
   outline-offset: 2px;
 }
 
 #category-controls .btn {
   flex: 0 0 auto;
   height: 44px;
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-bold);
 }
 
 #add-module-form {
@@ -532,13 +600,13 @@ header {
   padding: var(--space-sm);
   background: var(--color-bg-surface);
   border-radius: var(--radius-md);
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
 }
 
 #add-module-form input,
 #add-module-form select {
   height: 44px;
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: 0 var(--space-sm);
   font-family: var(--font-sans);
@@ -546,7 +614,6 @@ header {
   background-color: var(--color-bg-main);
   color: var(--color-text-primary);
   transition: border 0.2s ease;
-  font-weight: var(--font-weight-medium);
 }
 
 #add-module-form input {
@@ -566,7 +633,7 @@ header {
 
 #add-module-form input:focus-visible,
 #add-module-form select:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 1px solid var(--color-primary);
   outline-offset: 2px;
 }
 
@@ -575,15 +642,14 @@ header {
   height: 44px;
   background-color: var(--color-primary);
   color: #FFFFFF;
-  border: 2px solid var(--color-primary);
+  border: 1px solid var(--color-primary);
   padding: 0 var(--space-md);
   border-radius: var(--radius-sm);
-  font-weight: var(--font-weight-bold);
+  font-weight: 500;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: var(--font-sans);
 }
 
 #add-module-form .btn:hover {
@@ -600,11 +666,11 @@ header {
   padding: var(--space-xs) var(--space-md);
   border-radius: var(--radius-sm);
   font-family: var(--font-sans);
-  font-weight: var(--font-weight-bold);
+  font-weight: 500;
   font-size: var(--text-small);
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
@@ -612,7 +678,7 @@ header {
 }
 
 .btn:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 1px solid var(--color-primary);
   outline-offset: 2px;
 }
 
@@ -650,7 +716,7 @@ header {
 
 .btn-secondary {
   background-color: transparent;
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   color: var(--color-text-primary);
 }
 
@@ -667,7 +733,7 @@ header {
    Diálogo centrado (nombre del cliente y producto)
    ============================================================ */
 #client-dialog {
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-lg);
   max-width: 420px;
@@ -683,15 +749,14 @@ header {
 }
 
 #client-dialog::backdrop {
-  background-color: rgba(0,0,0,0.45);
-  backdrop-filter: blur(4px);
+  background-color: rgba(43, 42, 40, 0.45);
+  backdrop-filter: blur(3px);
 }
 
 #client-dialog h3 {
-  font-family: var(--font-heading);
+  font-family: var(--font-serif);
   font-size: var(--text-h2);
-  font-weight: var(--font-weight-black);
-  letter-spacing: -0.5px;
+  letter-spacing: 0.03em;
   margin-bottom: var(--space-sm);
   color: var(--color-text-primary);
 }
@@ -703,7 +768,7 @@ header {
 #client-dialog .form-group label {
   display: block;
   font-size: var(--text-small);
-  font-weight: var(--font-weight-bold);
+  font-weight: 500;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   margin-bottom: var(--space-xs);
@@ -713,7 +778,7 @@ header {
 #client-dialog .form-group input {
   width: 100%;
   height: 44px;
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: 0 var(--space-sm);
   font-family: var(--font-sans);
@@ -721,7 +786,6 @@ header {
   background-color: var(--color-bg-main);
   color: var(--color-text-primary);
   transition: border 0.2s ease;
-  font-weight: var(--font-weight-medium);
 }
 
 #client-dialog .form-group input:focus {
@@ -730,7 +794,7 @@ header {
 }
 
 #client-dialog .form-group input:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 1px solid var(--color-primary);
   outline-offset: 2px;
 }
 
@@ -751,22 +815,167 @@ header {
 .app-footer {
   margin-top: var(--space-xl);
   padding-top: var(--space-md);
-  border-top: 2px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
   text-align: center;
   font-size: var(--text-small);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--color-text-secondary);
-  font-weight: var(--font-weight-medium);
 }
 
 /* ============================================================
-   Estilos adicionales
+   Responsive: Móviles y tablets
+   ============================================================ */
+@media (max-width: 1023px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .sidebar {
+    position: static;
+    top: auto;
+    margin-top: var(--space-md);
+  }
+}
+
+@media (max-width: 767px) {
+  .content-grid {
+    gap: var(--space-md);
+    margin-bottom: 0;
+  }
+
+  .sidebar {
+    margin-top: var(--space-md);
+  }
+
+  .summary-card,
+  .portfolios-card {
+    padding: var(--space-sm);
+  }
+
+  .total-amount {
+    font-size: 2rem;
+  }
+
+  .module-card {
+    padding: var(--space-sm);
+    font-size: var(--text-small);
+  }
+
+  .module-card .admin-actions .btn {
+    font-size: 0.7rem;
+    padding: 0 var(--space-xs);
+    min-height: 28px;
+  }
+
+  #add-module-form {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  #add-module-form input,
+  #add-module-form select,
+  #add-module-form .btn {
+    width: 100%;
+    flex: 1 1 auto;
+  }
+
+  #category-controls {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  #category-controls input,
+  #category-controls .btn {
+    width: 100%;
+  }
+
+  .category-header {
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .category-header .category-actions {
+    display: flex;
+    gap: var(--space-xs);
+    margin-left: auto;
+  }
+
+  .app-footer {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-sm);
+  }
+
+  .add-portfolio-form {
+    flex-direction: column;
+  }
+
+  .add-portfolio-form input,
+  .add-portfolio-form .btn {
+    width: 100%;
+  }
+
+  .portfolio-item {
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .portfolio-item .pf-actions {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-sm);
+  }
+
+  .header-left,
+  .header-right {
+    justify-content: space-between;
+  }
+
+  .logo h1 {
+    font-size: 1.6rem;
+  }
+
+  .btn-toggle {
+    font-size: 0.7rem;
+    padding: var(--space-xs) var(--space-sm);
+    min-height: 36px;
+  }
+
+  #currency-select {
+    font-size: 0.7rem;
+    padding: var(--space-xs) var(--space-sm);
+    min-height: 36px;
+  }
+
+  .summary-card,
+  .portfolios-card {
+    padding: var(--space-sm);
+  }
+
+  .total-amount {
+    font-size: 1.8rem;
+  }
+
+  #client-dialog {
+    padding: var(--space-md);
+    width: 95%;
+  }
+}
+
+/* ============================================================
+   Estilos adicionales para botones de categoría, diálogos, etc.
    ============================================================ */
 
 .btn-rates {
   background: transparent;
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   color: var(--color-text-primary);
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--radius-sm);
@@ -776,8 +985,6 @@ header {
   text-transform: uppercase;
   transition: all 0.2s ease;
   min-height: 44px;
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-bold);
 }
 .btn-rates:hover {
   background-color: var(--color-primary);
@@ -786,7 +993,7 @@ header {
 }
 
 dialog {
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-lg);
   max-width: 600px;
@@ -801,39 +1008,37 @@ dialog {
   margin: 0;
 }
 dialog::backdrop {
-  background-color: rgba(0,0,0,0.45);
-  backdrop-filter: blur(4px);
+  background-color: rgba(43, 42, 40, 0.45);
+  backdrop-filter: blur(3px);
 }
 .dialog-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--space-md);
-  border-bottom: 2px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
   padding-bottom: var(--space-sm);
 }
 .dialog-header h2 {
-  font-family: var(--font-heading);
+  font-family: var(--font-serif);
   font-size: var(--text-h2);
-  font-weight: var(--font-weight-black);
-  letter-spacing: -0.5px;
+  letter-spacing: 0.03em;
   color: var(--color-text-primary);
 }
 .dialog-close {
   background: none;
   border: none;
   color: var(--color-text-secondary);
-  font-size: 2rem;
+  font-size: 1.8rem;
   cursor: pointer;
   transition: color 0.2s ease;
-  font-weight: var(--font-weight-bold);
 }
 .dialog-close:hover {
   color: var(--color-text-primary);
 }
 .dialog-footer {
   margin-top: var(--space-md);
-  border-top: 2px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
   padding-top: var(--space-sm);
   display: flex;
   justify-content: flex-end;
@@ -844,10 +1049,10 @@ dialog::backdrop {
   width: 100%;
   padding: var(--space-sm) var(--space-md);
   background: var(--color-bg-surface);
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   color: var(--color-text-primary);
-  font-weight: var(--font-weight-bold);
+  font-weight: 500;
   font-size: var(--text-body);
   letter-spacing: 0.03em;
   cursor: pointer;
@@ -865,7 +1070,7 @@ dialog::backdrop {
   display: none;
   flex-direction: column;
   background: var(--color-bg-surface);
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-floating);
   padding: var(--space-xs) 0;
@@ -885,8 +1090,6 @@ dialog::backdrop {
   cursor: pointer;
   transition: background 0.15s ease;
   width: 100%;
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-medium);
 }
 .pf-context-menu .pf-menu-item:hover {
   background: var(--color-primary-muted);
@@ -895,13 +1098,118 @@ dialog::backdrop {
   color: var(--color-danger);
 }
 .pf-context-menu .pf-menu-item.danger:hover {
-  background: rgba(211, 47, 47, 0.1);
+  background: rgba(181, 103, 90, 0.12);
+}
+
+.pf-actions-container {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.25s ease, margin 0.3s ease;
+  margin-top: 0;
+}
+
+.pf-actions-container.open {
+  max-height: 200px;
+  opacity: 1;
+  margin-top: var(--space-sm);
+}
+
+.pf-actions-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  justify-content: center;
+  padding: var(--space-xs) 0;
+}
+
+.pf-action-btn {
+  flex: 0 1 auto;
+  min-width: 80px;
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-primary);
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.pf-action-btn:hover {
+  background: var(--color-primary-muted);
+  border-color: var(--color-primary);
+}
+
+.pf-action-btn.danger {
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.pf-action-btn.danger:hover {
+  background: rgba(181, 103, 90, 0.1);
+  border-color: var(--color-danger);
+}
+
+.pf-edit-form,
+.add-portfolio-form-inline {
+  display: none;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+  background: var(--color-bg-main);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  margin-top: var(--space-sm);
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.pf-edit-form input,
+.add-portfolio-form-inline input {
+  flex: 1 1 150px;
+  height: 36px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0 var(--space-sm);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  font-size: var(--text-small);
+}
+
+.pf-edit-form .btn,
+.add-portfolio-form-inline .btn {
+  height: 36px;
+  font-size: var(--text-small);
+  padding: 0 var(--space-sm);
+}
+
+.add-portfolio-container {
+  margin-top: var(--space-md);
+  display: flex;
+  justify-content: center;
+}
+.add-portfolio-container .btn {
+  width: 100%;
+  max-width: 250px;
+}
+
+#portfolios-card {
+  display: flex;
+  flex-direction: column;
 }
 
 #rates-dialog .form-group label {
   display: block;
   font-size: var(--text-small);
-  font-weight: var(--font-weight-bold);
+  font-weight: 500;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   margin-bottom: var(--space-xs);
@@ -910,19 +1218,54 @@ dialog::backdrop {
 #rates-dialog .form-group input {
   width: 100%;
   height: 44px;
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: 0 var(--space-sm);
   background: var(--color-bg-main);
   color: var(--color-text-primary);
   font-size: var(--text-body);
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-medium);
 }
 
+/* Responsive para diálogos y menú de portafolios */
+@media (max-width: 767px) {
+  .pf-context-menu {
+    min-width: 140px;
+    max-width: 90vw;
+  }
+  .pf-context-menu .pf-menu-item {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.8rem;
+  }
+  .pf-edit-form,
+  .add-portfolio-form-inline {
+    flex-direction: column;
+  }
+  .pf-edit-form input,
+  .add-portfolio-form-inline input,
+  .pf-edit-form .btn,
+  .add-portfolio-form-inline .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  dialog {
+    padding: var(--space-md);
+    width: 95%;
+  }
+  .pf-actions-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .pf-action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+/* Estilos para el diálogo de edición de módulo */
 #edit-module-dialog .form-group textarea {
   width: 100%;
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: var(--space-sm);
   font-family: var(--font-sans);
@@ -931,16 +1274,16 @@ dialog::backdrop {
   color: var(--color-text-primary);
   resize: vertical;
   transition: border 0.2s ease;
-  font-weight: var(--font-weight-medium);
 }
 #edit-module-dialog .form-group textarea:focus {
   border-color: var(--color-primary);
   outline: none;
 }
 
+/* Estilo para el textarea en el formulario de agregar */
 #add-module-form textarea {
   width: 100%;
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: var(--space-sm);
   font-family: var(--font-sans);
@@ -949,100 +1292,16 @@ dialog::backdrop {
   color: var(--color-text-primary);
   resize: vertical;
   transition: border 0.2s ease;
-  font-weight: var(--font-weight-medium);
 }
 #add-module-form textarea:focus {
   border-color: var(--color-primary);
   outline: none;
 }
-
-#demo-counter {
-  font-size: var(--text-small);
-  letter-spacing: 0.02em;
-  margin-bottom: 0.25rem;
-}
-
-.module-card:not(.admin-mode) .module-price {
-  margin-left: auto;
-  flex-shrink: 0;
-  text-align: right;
-}
-
 /* ============================================================
-   ACORDEÓN POR CATEGORÍA
+   MEJORAS RESPONSIVE PARA MÓVIL
    ============================================================ */
 
-.category-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
-  border-bottom: 2px solid var(--color-border);
-  cursor: pointer;
-  user-select: none;
-  transition: background 0.2s ease;
-  border-radius: var(--radius-sm);
-}
-
-.category-header:hover {
-  background: var(--color-primary-muted);
-}
-
-.category-header h3 {
-  font-family: var(--font-heading);
-  font-size: var(--text-h2);
-  font-weight: var(--font-weight-black);
-  letter-spacing: -0.5px;
-  text-transform: uppercase;
-  color: var(--color-text-primary);
-  margin: 0;
-}
-
-.category-counter {
-  font-size: var(--text-small);
-  color: var(--color-text-secondary);
-  font-weight: var(--font-weight-normal);
-  margin-left: auto;
-  margin-right: var(--space-sm);
-}
-
-.category-arrow {
-  font-size: 0.8rem;
-  color: var(--color-text-secondary);
-  transition: transform 0.3s ease;
-  display: inline-block;
-  width: 20px;
-  text-align: center;
-}
-
-.category-modules-wrapper {
-  overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
-  max-height: 2000px;
-  opacity: 1;
-  margin-bottom: var(--space-md);
-}
-
-.category-modules-wrapper.collapsed {
-  max-height: 0;
-  opacity: 0;
-  margin-bottom: 0;
-  overflow: hidden;
-}
-
-.category-section .category-header .category-arrow {
-  display: none;
-}
-
-.category-section .category-header .category-counter {
-  display: none;
-}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-
+/* Tablets y pantallas medianas */
 @media (max-width: 1023px) {
   .content-grid {
     grid-template-columns: 1fr;
@@ -1054,6 +1313,7 @@ dialog::backdrop {
   }
 }
 
+/* Móviles grandes (hasta 768px) */
 @media (max-width: 767px) {
   .content-grid {
     gap: var(--space-md);
@@ -1127,39 +1387,9 @@ dialog::backdrop {
     max-height: 90vh;
     overflow-y: auto;
   }
-  .pf-context-menu {
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 90%;
-    max-width: 320px;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    border-radius: var(--radius-md);
-    padding: var(--space-sm) 0;
-  }
-  .pf-context-menu .pf-menu-item {
-    padding: 14px 18px;
-    font-size: 1rem;
-    text-align: center;
-  }
-  .pf-button {
-    font-size: 1rem;
-    padding: 14px;
-  }
-  .pf-actions-wrapper {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .pf-action-btn {
-    width: 100%;
-    justify-content: center;
-    font-size: 0.9rem;
-  }
 }
 
+/* Móviles pequeños (hasta 640px) */
 @media (max-width: 640px) {
   header {
     flex-direction: column;
@@ -1196,6 +1426,7 @@ dialog::backdrop {
   }
 }
 
+/* Móviles muy pequeños (hasta 480px) */
 @media (max-width: 480px) {
   body {
     padding: var(--space-sm);
@@ -1227,6 +1458,7 @@ dialog::backdrop {
     min-width: 80px;
     font-size: 0.85rem;
   }
+  /* Tarjetas de módulo en móvil - más espacio y textos legibles */
   .module-card {
     padding: var(--space-sm) var(--space-md);
     flex-wrap: wrap;
@@ -1238,6 +1470,7 @@ dialog::backdrop {
     flex: 1 1 60%;
     min-width: 0;
     margin-left: var(--space-xs);
+    /* Permitimos que el texto ocupe varias líneas si es necesario */
     white-space: normal;
     word-break: break-word;
   }
@@ -1253,6 +1486,7 @@ dialog::backdrop {
     height: 22px;
     flex-shrink: 0;
   }
+  /* Formulario agregar módulo */
   #add-module-form input,
   #add-module-form select,
   #add-module-form textarea {
@@ -1264,19 +1498,41 @@ dialog::backdrop {
     width: 100%;
     font-size: 1rem;
   }
-  .category-header {
-    padding: var(--space-xs) var(--space-sm);
-    flex-wrap: wrap;
-    gap: var(--space-xs);
+  /* Menú contextual de portafolios en móvil (overlay centrado) */
+  .pf-context-menu {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90%;
+    max-width: 320px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) 0;
   }
-  .category-header h3 {
-    font-size: 1.2rem;
+  .pf-context-menu .pf-menu-item {
+    padding: 14px 18px;
+    font-size: 1rem;
+    text-align: center;
   }
-  .category-counter {
-    font-size: 0.7rem;
+  .pf-button {
+    font-size: 1rem;
+    padding: 14px;
+  }
+  .pf-actions-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .pf-action-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.9rem;
   }
 }
 
+/* Móviles extra pequeños (hasta 400px) */
 @media (max-width: 400px) {
   body {
     padding: var(--space-xs);
@@ -1296,5 +1552,111 @@ dialog::backdrop {
   #edit-module-dialog .form-group input,
   #edit-module-dialog .form-group textarea {
     font-size: 0.9rem;
+  }
+}
+
+/* ============================================================
+   ARREGLO PARA PRECIOS EN MÓVIL - PONERLOS A LA DERECHA
+   ============================================================ */
+
+/* Esto aplica en todos los tamaños de pantalla: el precio siempre a la derecha */
+.module-card:not(.admin-mode) .module-price {
+  margin-left: auto;
+  flex-shrink: 0;
+  text-align: right;
+}
+#demo-counter {
+  font-size: var(--text-small);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.25rem;
+}
+/* ============================================================
+   ACORDEÓN POR CATEGORÍA
+   ============================================================ */
+
+/* Header de categoría clickeable */
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease;
+  border-radius: var(--radius-sm);
+}
+
+.category-header:hover {
+  background: var(--color-primary-muted);
+}
+
+.category-header h3 {
+  font-family: var(--font-serif);
+  font-size: var(--text-h2);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.category-counter {
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+  font-weight: 400;
+  margin-left: auto;
+  margin-right: var(--space-sm);
+}
+
+.category-arrow {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  transition: transform 0.3s ease;
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+}
+
+/* Wrapper del contenido de la categoría (colapsable) */
+.category-modules-wrapper {
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+  max-height: 2000px; /* Altura máxima cuando está expandido */
+  opacity: 1;
+  margin-bottom: var(--space-md);
+}
+
+.category-modules-wrapper.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+/* Ajustes para el modo administración (sin acordeón) */
+.category-section .category-header .category-arrow {
+  display: none; /* Ocultar flecha en modo admin */
+}
+
+.category-section .category-header .category-counter {
+  display: none; /* Ocultar contador en modo admin */
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .category-header {
+    padding: var(--space-xs) var(--space-sm);
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+  
+  .category-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .category-counter {
+    font-size: 0.7rem;
   }
 }
