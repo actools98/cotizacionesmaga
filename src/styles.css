@@ -907,4 +907,394 @@ dialog::backdrop {
   margin-bottom: var(--space-xs);
   color: var(--color-text-secondary);
 }
-#rates-d
+#rates-dialog .form-group input {
+  width: 100%;
+  height: 44px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0 var(--space-sm);
+  background: var(--color-bg-main);
+  color: var(--color-text-primary);
+  font-size: var(--text-body);
+  font-family: var(--font-sans);
+  font-weight: var(--font-weight-medium);
+}
+
+#edit-module-dialog .form-group textarea {
+  width: 100%;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  background-color: var(--color-bg-main);
+  color: var(--color-text-primary);
+  resize: vertical;
+  transition: border 0.2s ease;
+  font-weight: var(--font-weight-medium);
+}
+#edit-module-dialog .form-group textarea:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+#add-module-form textarea {
+  width: 100%;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  background-color: var(--color-bg-main);
+  color: var(--color-text-primary);
+  resize: vertical;
+  transition: border 0.2s ease;
+  font-weight: var(--font-weight-medium);
+}
+#add-module-form textarea:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+#demo-counter {
+  font-size: var(--text-small);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.25rem;
+}
+
+.module-card:not(.admin-mode) .module-price {
+  margin-left: auto;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+/* ============================================================
+   ACORDEÓN POR CATEGORÍA
+   ============================================================ */
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 2px solid var(--color-border);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease;
+  border-radius: var(--radius-sm);
+}
+
+.category-header:hover {
+  background: var(--color-primary-muted);
+}
+
+.category-header h3 {
+  font-family: var(--font-heading);
+  font-size: var(--text-h2);
+  font-weight: var(--font-weight-black);
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.category-counter {
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-normal);
+  margin-left: auto;
+  margin-right: var(--space-sm);
+}
+
+.category-arrow {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  transition: transform 0.3s ease;
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+}
+
+.category-modules-wrapper {
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+  max-height: 2000px;
+  opacity: 1;
+  margin-bottom: var(--space-md);
+}
+
+.category-modules-wrapper.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+.category-section .category-header .category-arrow {
+  display: none;
+}
+
+.category-section .category-header .category-counter {
+  display: none;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1023px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  .sidebar {
+    position: static;
+    margin-top: var(--space-md);
+  }
+}
+
+@media (max-width: 767px) {
+  .content-grid {
+    gap: var(--space-md);
+    margin-bottom: 0;
+  }
+  .sidebar {
+    margin-top: var(--space-md);
+  }
+  .summary-card,
+  .portfolios-card {
+    padding: var(--space-sm);
+  }
+  .total-amount {
+    font-size: 2rem;
+  }
+  .module-card {
+    padding: var(--space-sm);
+    font-size: var(--text-body);
+  }
+  .module-card .admin-actions .btn {
+    font-size: 0.75rem;
+    padding: 0 var(--space-xs);
+    min-height: 32px;
+  }
+  #add-module-form {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  #add-module-form input,
+  #add-module-form select,
+  #add-module-form .btn {
+    width: 100%;
+    flex: 1 1 auto;
+  }
+  #category-controls {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  #category-controls input,
+  #category-controls .btn {
+    width: 100%;
+  }
+  .category-header {
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+  .category-header .category-actions {
+    display: flex;
+    gap: var(--space-xs);
+    margin-left: auto;
+  }
+  .app-footer {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-sm);
+  }
+  .add-portfolio-form {
+    flex-direction: column;
+  }
+  .add-portfolio-form input,
+  .add-portfolio-form .btn {
+    width: 100%;
+  }
+  .portfolio-item {
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+  .portfolio-item .pf-actions {
+    margin-left: auto;
+  }
+  #portfolios-dialog {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .pf-context-menu {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90%;
+    max-width: 320px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) 0;
+  }
+  .pf-context-menu .pf-menu-item {
+    padding: 14px 18px;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .pf-button {
+    font-size: 1rem;
+    padding: 14px;
+  }
+  .pf-actions-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .pf-action-btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 640px) {
+  header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-sm);
+  }
+  .header-left {
+    justify-content: space-between;
+  }
+  .header-right {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--space-xs);
+  }
+  .header-right .btn,
+  .header-right .btn-rates,
+  .header-right #currency-select {
+    font-size: 0.8rem;
+    padding: var(--space-xs) var(--space-sm);
+    min-height: 38px;
+  }
+  .logo .logo-img {
+    height: 36px;
+  }
+  .btn-toggle {
+    font-size: 0.8rem;
+    padding: var(--space-xs) var(--space-sm);
+    min-height: 38px;
+  }
+  #currency-select {
+    font-size: 0.8rem;
+    padding: var(--space-xs) var(--space-sm);
+    min-height: 38px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: var(--space-sm);
+  }
+  .app-container {
+    padding: var(--space-xs);
+  }
+  .summary-card,
+  .portfolios-card {
+    padding: var(--space-sm);
+  }
+  .total-amount {
+    font-size: 1.8rem;
+  }
+  #client-dialog {
+    padding: var(--space-md);
+    width: 95%;
+    top: 10%;
+    transform: translateX(-50%);
+  }
+  dialog {
+    padding: var(--space-md);
+    max-width: 95%;
+    margin: 0 auto;
+    top: 10%;
+    transform: translateX(-50%);
+  }
+  .dialog-actions .btn {
+    min-width: 80px;
+    font-size: 0.85rem;
+  }
+  .module-card {
+    padding: var(--space-sm) var(--space-md);
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+  .module-card .module-label {
+    font-size: 1rem;
+    flex: 1 1 60%;
+    min-width: 0;
+    margin-left: var(--space-xs);
+    white-space: normal;
+    word-break: break-word;
+  }
+  .module-card .module-price {
+    font-size: 1rem;
+    white-space: nowrap;
+    margin-left: auto;
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .module-card input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+  #add-module-form input,
+  #add-module-form select,
+  #add-module-form textarea {
+    width: 100%;
+    flex: 1 1 auto;
+    font-size: 1rem;
+  }
+  #add-module-form .btn {
+    width: 100%;
+    font-size: 1rem;
+  }
+  .category-header {
+    padding: var(--space-xs) var(--space-sm);
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+  .category-header h3 {
+    font-size: 1.2rem;
+  }
+  .category-counter {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 400px) {
+  body {
+    padding: var(--space-xs);
+  }
+  .app-container {
+    padding: var(--space-xs);
+  }
+  .total-amount {
+    font-size: 1.5rem;
+  }
+  .btn {
+    font-size: 0.8rem;
+    padding: var(--space-xs) var(--space-sm);
+    min-height: 38px;
+  }
+  #client-dialog .form-group input,
+  #edit-module-dialog .form-group input,
+  #edit-module-dialog .form-group textarea {
+    font-size: 0.9rem;
+  }
+}
