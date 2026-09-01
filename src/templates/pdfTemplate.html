@@ -2,11 +2,11 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <!-- Importar Outfit para el PDF -->
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Importar Inter para el PDF (MAGA Beauty) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     /* ==========================================================
-       RESET Y BASE
+       RESET Y BASE - TEMA MAGA BEAUTY (Inter Bold)
        ========================================================== */
     * {
       margin: 0;
@@ -14,15 +14,16 @@
       box-sizing: border-box;
     }
     body {
-      font-family: 'Outfit', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 400;
       background: #ffffff;
-      color: #000000;
+      color: #111111;
       line-height: 1.5;
     }
     .pdf-container {
-      width: 794px;         /* Ancho fijo */
-      min-height: 1123px;   /* Altura mínima de A4 */
-      padding: 48px;        /* Padding trasladado al contenedor */
+      width: 794px;
+      min-height: 1123px;
+      padding: 48px;
       background: #ffffff;
       position: absolute;
       top: 0;
@@ -31,7 +32,7 @@
     }
 
     /* ==========================================================
-       ENCABEZADO: LOGO + BADGE (10pt)
+       ENCABEZADO
        ========================================================== */
     .header {
       text-align: center;
@@ -45,38 +46,39 @@
     }
     .header .badge {
       font-size: 10pt;
-      font-weight: 600;
-      color: #000000;
-      background: #e8e8e8;
+      font-weight: 700;
+      color: #111111;
+      background: #f0f0f0;
       padding: 2px 16px;
-      border-radius: 20px;
+      border-radius: 4px;
       display: inline-block;
-      letter-spacing: 0.3px;
-      font-family: 'Outfit', sans-serif;
+      letter-spacing: 0.5px;
+      font-family: 'Inter', sans-serif;
+      text-transform: uppercase;
     }
 
     /* ==========================================================
        DIVISOR
        ========================================================== */
     .divider {
-      border-top: 2px solid #1e3a8a;
+      border-top: 2px solid #111111;
       margin: 16px 0;
     }
 
     /* ==========================================================
-       INFORMACIÓN DEL CLIENTE (11pt)
+       INFORMACIÓN DEL CLIENTE
        ========================================================== */
     .client-info {
       margin-bottom: 16px;
       font-size: 11pt;
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Inter', sans-serif;
     }
     .client-info p {
       margin: 4px 0;
     }
     .client-info strong {
-      font-weight: 600;
-      color: #000000;
+      font-weight: 700;
+      color: #111111;
     }
 
     /* ==========================================================
@@ -87,17 +89,19 @@
       border-collapse: collapse;
       margin: 16px 0;
       font-size: 11pt;
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Inter', sans-serif;
     }
 
     .services-table th {
-      background-color: #000000;
+      background-color: #111111;
       color: #ffffff;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 12pt;
       padding: 8px 12px;
       text-align: left;
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Inter', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     .services-table th:last-child {
       text-align: right;
@@ -107,49 +111,52 @@
       background-color: #ffffff;
       padding: 8px 12px;
       vertical-align: top;
+      border-bottom: 1px solid #e5e5e5;
     }
 
     .service-name {
       font-weight: 700;
-      color: #000000;
+      color: #111111;
       display: block;
       margin-bottom: 4px;
       font-size: 11pt;
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Inter', sans-serif;
     }
 
     .service-detail {
       font-size: 10pt;
-      color: #333333;
+      font-weight: 400;
+      color: #555555;
       white-space: pre-wrap;
       word-wrap: break-word;
-      background-color: #f2f6fa;
+      background-color: #f5f5f5;
       padding: 6px 10px;
       border-radius: 4px;
-      border-left: 3px solid #000000;
+      border-left: 3px solid #111111;
       margin-top: 4px;
       display: block;
       line-height: 1.4;
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Inter', sans-serif;
     }
 
     .service-price {
       font-weight: 700;
-      color: #000000;
+      color: #111111;
       text-align: right;
       white-space: nowrap;
       display: block;
       font-size: 11pt;
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Inter', sans-serif;
     }
 
     .total-row td {
       background-color: #ffffff;
       padding: 10px 12px;
-      font-weight: 700;
-      color: #000000;
+      font-weight: 800;
+      color: #111111;
       font-size: 14pt;
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Inter', sans-serif;
+      border-top: 2px solid #111111;
     }
     .total-row .total-label {
       text-align: left;
@@ -160,24 +167,22 @@
     }
 
     /* ==========================================================
-       PIE DE PÁGINA (9pt)
+       PIE DE PÁGINA
        ========================================================== */
     .footer {
       margin-top: 40px;
       font-size: 9pt;
-      color: #6b7280;
-      border-top: 1px solid #d6d6d6;
+      font-weight: 400;
+      color: #888888;
+      border-top: 1px solid #e5e5e5;
       padding-top: 12px;
       text-align: center;
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Inter', sans-serif;
     }
     .footer p {
       margin: 2px 0;
     }
 
-    /* ==========================================================
-       MEDIA QUERY PARA IMPRESIÓN
-       ========================================================== */
     @media print {
       body { padding: 0; }
       .pdf-container { margin: 0; position: static; min-height: auto; }
@@ -187,15 +192,13 @@
 <body>
 <div class="pdf-container">
 
-  <!-- ENCABEZADO: LOGO + BADGE -->
   <div class="header">
-   <img src="/data/logo-by-naldo.png" alt="by naldo" class="logo-img" />
+    <img src="/data/logo-maga-beauty.png" alt="MAGA Beauty" class="logo-img" />
     <span class="badge">Cotización</span>
   </div>
 
   <div class="divider"></div>
 
-  <!-- INFORMACIÓN DEL CLIENTE -->
   <div class="client-info">
     <p><strong>Cliente:</strong> {{clientName}}</p>
     <p><strong>Producto o servicio:</strong> {{productName}}</p>
@@ -204,7 +207,6 @@
 
   <div class="divider"></div>
 
-  <!-- TABLA DE SERVICIOS -->
   <table class="services-table">
     <thead>
       <tr>
@@ -221,7 +223,6 @@
     </tbody>
   </table>
 
-  <!-- PIE DE PÁGINA -->
   <div class="footer">
     <p>Esta cotización es válida por 30 días.</p>
     <p>Powered by actols.com</p>
