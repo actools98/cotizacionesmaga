@@ -1,41 +1,17 @@
 // ============================================================
-//  SISTEMA DE TEMAS
+//  CONFIGURACIÓN INICIAL - MAGA BEAUTY
 // ============================================================
 
-function detectTheme() {
-  const urlParams = new URLSearchParams(window.location.search);
-  let theme = urlParams.get('theme');
-  
-  // Si no viene por URL, revisar localStorage
-  if (!theme) {
-    theme = localStorage.getItem('actols_theme') || 'naldo';
-  }
-  
-  // Aplicar tema
-  const html = document.documentElement;
-  const titleEl = document.getElementById('page-title');
-  
-  if (theme === 'maga') {
-    html.classList.add('theme-maga');
-    html.classList.remove('theme-naldo');
-    if (titleEl) titleEl.textContent = 'Cotizaciones MAGA Beauty';
-    localStorage.setItem('actols_theme', 'maga');
-    // Opcional: cambiar logo si es necesario
-    const logo = document.getElementById('brand-logo');
-    if (logo) logo.src = '/data/logo-maga-beauty.png'; // Reemplaza con tu logo
-  } else {
-    html.classList.add('theme-naldo');
-    html.classList.remove('theme-maga');
-    if (titleEl) titleEl.textContent = 'Cotizaciones By Naldo';
-    localStorage.setItem('actols_theme', 'naldo');
-    const logo = document.getElementById('brand-logo');
-    if (logo) logo.src = '/data/logo-by-naldo.png';
-  }
-}
+// Establecer título
+document.title = 'Cotizaciones MAGA Beauty';
 
-// Ejecutar antes de cualquier otra cosa
-detectTheme();
+// El logo ya está en el HTML como /data/logo-maga-beauty.png
+// Asegúrate de tener el archivo en esa ruta
 
+// ============================================================
+//  AUTENTICACIÓN
+// ============================================================
+const PASSWORD = 'MC10';
 // ============================================================
 //  + Portafolios con menú contextual
 //  + Contador de días de demo (27/08/2026 – 11/09/2026)
