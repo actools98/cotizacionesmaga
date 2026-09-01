@@ -1,20 +1,7 @@
 // ============================================================
-//  CONFIGURACIÓN INICIAL - MAGA BEAUTY
-// ============================================================
-
-// Establecer título
-document.title = 'Cotizaciones MAGA Beauty';
-
-// El logo ya está en el HTML como /data/logo-maga-beauty.png
-// Asegúrate de tener el archivo en esa ruta
-
-// ============================================================
-//  AUTENTICACIÓN
-// ============================================================
-const PASSWORD = 'MC10';
-// ============================================================
 //  + Portafolios con menú contextual
 //  + Contador de días de demo (27/08/2026 – 11/09/2026)
+//  + MAGA BEAUTY - Inter Bold
 // ============================================================
 
 import { getModules, addModule, deleteModule, editModule, reorderModules, getCategories, addCategory, editCategory, deleteCategory, reorderCategories, getPortfolios, addPortfolio, editPortfolio, deletePortfolio } from './state.js';
@@ -26,6 +13,13 @@ import { formatCurrency } from './utils/formatters.js';
 import Sortable from 'sortablejs';
 
 // ============================================================
+//  CONFIGURACIÓN - MAGA BEAUTY
+// ============================================================
+
+// Establecer título
+document.title = 'Cotizaciones MAGA Beauty';
+
+// ============================================================
 //  CONTROL DE DEMO (expirada o no)
 // ============================================================
 const DEMO_END = new Date(2026, 8, 14); // 11 de septiembre de 2026
@@ -35,31 +29,25 @@ function isDemoExpired() {
   const urlParams = new URLSearchParams(window.location.search);
   const forceParam = urlParams.get('force_expired');
 
-  // Caso 1: force_expired=false -> desactivar expiración forzada y recargar sin parámetros
   if (forceParam === 'false') {
     localStorage.removeItem(FORCE_EXPIRED_KEY);
-    // Si hay parámetros en la URL, los eliminamos todos para recargar limpio
     if (window.location.search) {
       const cleanUrl = window.location.pathname;
       window.location.replace(cleanUrl);
-      return false; // no se ejecutará porque la página se recarga
+      return false;
     }
-    // Si no había parámetros, simplemente devolvemos false (no expirado)
     return false;
   }
 
-  // Caso 2: force_expired=true -> forzar expiración y guardar en localStorage
   if (forceParam === 'true') {
     localStorage.setItem(FORCE_EXPIRED_KEY, 'true');
     return true;
   }
 
-  // Caso 3: flag en localStorage (persistente)
   if (localStorage.getItem(FORCE_EXPIRED_KEY) === 'true') {
     return true;
   }
 
-  // Caso 4: fecha actual >= fecha de fin
   const now = new Date();
   return now >= DEMO_END;
 }
@@ -154,49 +142,7 @@ const editModuleSave = document.getElementById('edit-module-save');
 const editModuleCancel = document.getElementById('edit-module-cancel');
 
 let currentEditingModuleId = null;
-// ============================================================
-//  BOTONES PARA COLAPSAR/EXPANDIR TODO (OPCIONAL)
-// ============================================================
-function addCollapseButtons() {
-  const modulesContainer = document.getElementById('modules-container');
-  if (!modulesContainer) return;
-  
-  if (document.getElementById('collapse-controls')) return;
-  
-  const controls = document.createElement('div');
-  controls.id = 'collapse-controls';
-  controls.style.display = 'flex';
-  controls.style.gap = 'var(--space-sm)';
-  controls.style.marginBottom = 'var(--space-md)';
-  controls.style.justifyContent = 'flex-end';
-  
-  const collapseBtn = document.createElement('button');
-  collapseBtn.className = 'btn btn-secondary';
-  collapseBtn.textContent = 'Colapsar todo';
-  collapseBtn.addEventListener('click', async () => {  // ← AGREGAR 'async'
-    const { collapseAllModules } = await import('./utils/domHelpers.js');
-    collapseAllModules();
-    document.querySelectorAll('.module-card:not(.admin-mode) .module-toggle').forEach(toggle => {
-      toggle.classList.add('collapsed');
-    });
-  });
-  
-  const expandBtn = document.createElement('button');
-  expandBtn.className = 'btn btn-secondary';
-  expandBtn.textContent = 'Expandir todo';
-  expandBtn.addEventListener('click', async () => {   // ← AGREGAR 'async'
-    const { expandAllModules } = await import('./utils/domHelpers.js');
-    expandAllModules();
-    document.querySelectorAll('.module-card:not(.admin-mode) .module-toggle').forEach(toggle => {
-      toggle.classList.remove('collapsed');
-    });
-  });
-  
-  controls.appendChild(collapseBtn);
-  controls.appendChild(expandBtn);
-  
-  modulesContainer.parentNode.insertBefore(controls, modulesContainer);
-}
+
 // ============================================================
 //  ESTADO
 // ============================================================
@@ -207,7 +153,7 @@ let currentCurrency = 'COP';
 let currentCheckedIds = new Set();
 let isEditMode = false;
 let sortableInstances = [];
-let openContextMenuId = null; // ID del portafolio cuyo menú está abierto
+let openContextMenuId = null;
 
 // ============================================================
 //  INICIALIZACIÓN
@@ -221,7 +167,6 @@ async function initApp() {
     bindEvents();
     renderPortfoliosModal();
     updatePortfoliosVisibility();
-    // Contador de días de demo
     updateDemoCounter();
     setInterval(updateDemoCounter, 60000);
   } catch (error) {
@@ -231,15 +176,15 @@ async function initApp() {
 }
 
 // ============================================================
-//  CONTADOR DE DÍAS DE DEMO (27/08/2026 – 14/09/2026)
+//  CONTADOR DE DÍAS DE DEMO
 // ============================================================
 function updateDemoCounter() {
   const el = document.getElementById('demo-counter');
   if (!el) return;
 
   const now = new Date();
-  const start = new Date(2026, 7, 27); // 27 de agosto
-  const end = new Date(2026, 8, 14);   // 11 de septiembre
+  const start = new Date(2026, 7, 27);
+  const end = new Date(2026, 8, 14);
 
   let days = 0;
   if (now < start) {
@@ -311,7 +256,6 @@ function bindEvents() {
   editModuleSave.addEventListener('click', saveEditModule);
   editModuleCancel.addEventListener('click', () => editModuleDialog.close());
 
-  // Cerrar menú contextual al hacer clic fuera
   document.addEventListener('click', (e) => {
     if (openContextMenuId) {
       const menu = document.querySelector(`.pf-context-menu[data-id="${openContextMenuId}"]`);
@@ -438,7 +382,7 @@ function destroySortable() {
 }
 
 // ============================================================
-//  CRUD: MÓDULOS - MODIFICADO PARA ACEPTAR PRECIO 0
+//  CRUD: MÓDULOS
 // ============================================================
 async function onAddModule(e) {
   e.preventDefault();
@@ -573,7 +517,7 @@ function openPortfoliosDialog() {
 }
 
 function closePortfoliosDialog() {
-  closeContextMenu(); // cerrar menú si estaba abierto
+  closeContextMenu();
   portfoliosDialog.close();
 }
 
@@ -581,7 +525,6 @@ function renderPortfoliosModal() {
   if (!portfoliosListModal) return;
   portfoliosListModal.innerHTML = '';
 
-  // --- Lista de portafolios como botones ---
   if (!currentPortfolios || currentPortfolios.length === 0) {
     const emptyMsg = document.createElement('p');
     emptyMsg.textContent = 'No hay portafolios. Agrega uno.';
@@ -594,7 +537,6 @@ function renderPortfoliosModal() {
       wrapper.style.position = 'relative';
       wrapper.style.marginBottom = '8px';
 
-      // Botón principal
       const btn = document.createElement('button');
       btn.className = 'pf-button';
       btn.dataset.id = pf.id;
@@ -602,11 +544,11 @@ function renderPortfoliosModal() {
       btn.style.width = '100%';
       btn.style.padding = '10px 12px';
       btn.style.background = 'var(--color-bg-surface)';
-      btn.style.border = '1px solid var(--color-border)';
+      btn.style.border = '2px solid var(--color-border)';
       btn.style.borderRadius = 'var(--radius-sm)';
       btn.style.color = 'var(--color-text-primary)';
       btn.style.fontSize = 'var(--text-body)';
-      btn.style.fontWeight = '500';
+      btn.style.fontWeight = 'var(--font-weight-bold)';
       btn.style.cursor = 'pointer';
       btn.style.transition = 'all 0.2s ease';
       btn.style.textAlign = 'left';
@@ -625,7 +567,6 @@ function renderPortfoliosModal() {
         toggleContextMenu(pf.id);
       });
 
-      // Menú contextual
       const menu = document.createElement('div');
       menu.className = 'pf-context-menu';
       menu.dataset.id = pf.id;
@@ -635,7 +576,7 @@ function renderPortfoliosModal() {
       menu.style.left = '0';
       menu.style.right = '0';
       menu.style.background = 'var(--color-bg-surface)';
-      menu.style.border = '1px solid var(--color-border)';
+      menu.style.border = '2px solid var(--color-border)';
       menu.style.borderRadius = 'var(--radius-sm)';
       menu.style.boxShadow = 'var(--shadow-floating)';
       menu.style.zIndex = '1000';
@@ -662,6 +603,7 @@ function renderPortfoliosModal() {
         item.style.color = opt.danger ? 'var(--color-danger)' : 'var(--color-text-primary)';
         item.style.cursor = 'pointer';
         item.style.transition = 'background 0.15s ease';
+        item.style.fontWeight = 'var(--font-weight-medium)';
         item.addEventListener('mouseenter', () => {
           item.style.background = 'var(--color-primary-muted)';
         });
@@ -682,11 +624,10 @@ function renderPortfoliosModal() {
     });
   }
 
-  // --- Formulario para agregar ---
   const addForm = document.createElement('div');
   addForm.style.marginTop = '16px';
   addForm.style.paddingTop = '16px';
-  addForm.style.borderTop = '1px solid var(--color-border)';
+  addForm.style.borderTop = '2px solid var(--color-border)';
 
   const form = document.createElement('form');
   form.id = 'add-portfolio-form';
@@ -698,11 +639,12 @@ function renderPortfoliosModal() {
   nameInput.style.width = '100%';
   nameInput.style.padding = '8px 12px';
   nameInput.style.marginBottom = '8px';
-  nameInput.style.border = '1px solid var(--color-border)';
+  nameInput.style.border = '2px solid var(--color-border)';
   nameInput.style.borderRadius = 'var(--radius-sm)';
   nameInput.style.background = 'var(--color-bg-main)';
   nameInput.style.color = 'var(--color-text-primary)';
   nameInput.style.fontSize = 'var(--text-body)';
+  nameInput.style.fontWeight = 'var(--font-weight-medium)';
 
   const linkInput = document.createElement('input');
   linkInput.type = 'url';
@@ -711,11 +653,12 @@ function renderPortfoliosModal() {
   linkInput.style.width = '100%';
   linkInput.style.padding = '8px 12px';
   linkInput.style.marginBottom = '8px';
-  linkInput.style.border = '1px solid var(--color-border)';
+  linkInput.style.border = '2px solid var(--color-border)';
   linkInput.style.borderRadius = 'var(--radius-sm)';
   linkInput.style.background = 'var(--color-bg-main)';
   linkInput.style.color = 'var(--color-text-primary)';
   linkInput.style.fontSize = 'var(--text-body)';
+  linkInput.style.fontWeight = 'var(--font-weight-medium)';
 
   const submitBtn = document.createElement('button');
   submitBtn.type = 'submit';
@@ -738,7 +681,6 @@ function renderPortfoliosModal() {
     await onAddPortfolio(name, link);
     nameInput.value = '';
     linkInput.value = '';
-    // Re-renderizar
     renderPortfoliosModal();
   });
 
@@ -746,13 +688,12 @@ function renderPortfoliosModal() {
   portfoliosListModal.appendChild(addForm);
 }
 
-// Funciones auxiliares del menú contextual
 function toggleContextMenu(id) {
   if (openContextMenuId === id) {
     closeContextMenu();
     return;
   }
-  closeContextMenu(); // cerrar cualquier otro abierto
+  closeContextMenu();
   const menu = document.querySelector(`.pf-context-menu[data-id="${id}"]`);
   if (menu) {
     menu.style.display = 'block';
@@ -772,7 +713,6 @@ function copyLink(link) {
   navigator.clipboard.writeText(link).then(() => {
     alert('Enlace copiado al portapapeles');
   }).catch(() => {
-    // Fallback
     const textarea = document.createElement('textarea');
     textarea.value = link;
     document.body.appendChild(textarea);
