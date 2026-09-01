@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cotizaciones Maga Studio</title>
-  <!-- Google Fonts: Inter (sans-serif geométrica) -->
+  <title>Cotizaciones By Naldo</title>
+  <!-- Google Fonts: solo Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/src/styles.css" />
 </head>
 <body>
 
   <!-- MODAL DE LOGIN -->
-  <div id="login-overlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(4px); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column;">
-    <div style="background:#ffffff; padding:var(--space-lg); border-radius:8px; max-width:400px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.3); text-align:center;">
-      <h2 style="margin-bottom:var(--space-sm); color:#111111; font-weight:800; letter-spacing:-0.5px;">Acceso restringido</h2>
-      <p style="color:#666666; margin-bottom:var(--space-md);">Ingresa la contraseña para continuar</p>
-      <input type="password" id="password-input" placeholder="Contraseña" style="width:100%; height:44px; border:2px solid #e0e0e0; border-radius:6px; padding:0 var(--space-sm); background:#f8f8f8; color:#111111; font-size:var(--text-body); margin-bottom:var(--space-md); font-family:'Inter',sans-serif; font-weight:500;" />
+  <div id="login-overlay" style="position:fixed; inset:0; background:rgba(15,23,42,0.85); backdrop-filter:blur(4px); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+    <div style="background:var(--color-bg-surface); padding:var(--space-lg); border-radius:var(--radius-md); max-width:400px; width:90%; box-shadow:var(--shadow-floating); text-align:center;">
+      <h2 style="margin-bottom:var(--space-sm); color:var(--color-text-primary);">Acceso restringido</h2>
+      <p style="color:var(--color-text-secondary); margin-bottom:var(--space-md);">Ingresa la contraseña para continuar</p>
+      <input type="password" id="password-input" placeholder="Contraseña" style="width:100%; height:44px; border:1px solid var(--color-border); border-radius:var(--radius-sm); padding:0 var(--space-sm); background:var(--color-bg-main); color:var(--color-text-primary); font-size:var(--text-body); margin-bottom:var(--space-md);" />
       <button id="login-btn" class="btn btn-primary" style="width:100%;">Ingresar</button>
-      <div id="login-error" style="color:#D32F2F; margin-top:var(--space-sm); display:none; font-weight:600;">Contraseña incorrecta</div>
+      <div id="login-error" style="color:var(--color-danger); margin-top:var(--space-sm); display:none;">Contraseña incorrecta</div>
     </div>
   </div>
 
@@ -29,7 +29,7 @@
       <header>
         <div class="header-left">
           <div class="logo">
-            <img src="/data/logo-maga-beauty.png" alt="MAGA Beauty" class="logo-img" />
+            <img src="/data/logo-by-naldo.png" alt="by naldo" class="logo-img" />
           </div>
           <button class="btn-toggle" id="toggle-mode-btn">Editar</button>
         </div>
@@ -81,7 +81,7 @@
 
       <footer class="app-footer">
         <!-- CONTADOR DE DÍAS DE DEMO -->
-        <div id="demo-counter" style="margin-bottom: 0.25rem; font-weight:600; color:#666666;"></div>
+        <div id="demo-counter" style="margin-bottom: 0.25rem; font-weight: 500; color: var(--color-text-secondary);"></div>
         <p>powered by actols</p>
       </footer>
     </div>
