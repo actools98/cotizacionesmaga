@@ -183,8 +183,8 @@ function updateDemoCounter() {
   if (!el) return;
 
   const now = new Date();
-  const start = new Date(2026, 7, 27); // 27 de agosto
-  const end = new Date(2026, 8, 11);   // 11 de septiembre
+  const start = new Date(2026, 8, 2); // 2 de septiembre
+  const end = new Date(2026, 8, 17);   // 17 de septiembre
 
   let days = 0;
   if (now < start) {
