@@ -115,7 +115,7 @@ header {
 }
 
 .logo .logo-img {
-  height: 40px;      /* Ajusta según el tamaño deseado */
+  height: 80px;      /* Ajusta según el tamaño deseado */
   width: auto;
   display: block;
 }
