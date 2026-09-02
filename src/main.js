@@ -54,7 +54,7 @@ function isDemoExpired() {
 // ============================================================
 //  AUTENTICACIÓN
 // ============================================================
-const PASSWORD = 'VL18';
+const PASSWORD = 'MC10';
 const loginOverlay = document.getElementById('login-overlay');
 const appWrapper = document.getElementById('app-wrapper');
 const passwordInput = document.getElementById('password-input');
