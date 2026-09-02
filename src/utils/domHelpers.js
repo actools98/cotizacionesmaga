@@ -1,5 +1,29 @@
 // domHelpers.js - Funciones para creación y manipulación del DOM
 
+// Estado de colapso por categoría (persistente en sesión)
+const collapsedCategories = new Set();
+
+// Cargar estado de colapso desde localStorage
+function loadCollapsedState() {
+  try {
+    const saved = localStorage.getItem('actols_collapsed_categories');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      parsed.forEach(id => collapsedCategories.add(id));
+    }
+  } catch (e) { /* ignore */ }
+}
+
+// Guardar estado de colapso en localStorage
+function saveCollapsedState() {
+  try {
+    localStorage.setItem('actols_collapsed_categories', JSON.stringify(Array.from(collapsedCategories)));
+  } catch (e) { /* ignore */ }
+}
+
+// Cargar estado al inicio
+loadCollapsedState();
+
 export function createModuleCard(module, currency, convertFn, formatFn) {
   const { id, description, price } = module;
   const priceConverted = convertFn(price, currency);
@@ -40,6 +64,7 @@ export function renderModulesByCategory(container, modules, categories, currency
     container.appendChild(msg);
     return;
   }
+
   const grouped = {};
   categories.forEach(cat => {
     grouped[cat.id] = {
@@ -47,18 +72,59 @@ export function renderModulesByCategory(container, modules, categories, currency
       modules: modules.filter(m => m.category_id === cat.id) || []
     };
   });
+
   for (const catId in grouped) {
     const { category, modules: mods } = grouped[catId];
+    const isCollapsed = collapsedCategories.has(category.id);
+
     const section = document.createElement('div');
     section.className = 'category-section';
     section.dataset.categoryId = category.id;
 
+    // --- HEADER de categoría (clickeable) ---
     const header = document.createElement('div');
     header.className = 'category-header';
+    header.setAttribute('role', 'button');
+    header.setAttribute('aria-expanded', !isCollapsed);
+    header.setAttribute('tabindex', '0');
+    header.style.cursor = 'pointer';
+
+    // Título
     const title = document.createElement('h3');
     title.textContent = category.name;
     header.appendChild(title);
+
+    // Contador de módulos
+    const counter = document.createElement('span');
+    counter.className = 'category-counter';
+    counter.textContent = `${mods.length} servicio${mods.length !== 1 ? 's' : ''}`;
+    header.appendChild(counter);
+
+    // Flecha de toggle
+    const arrow = document.createElement('span');
+    arrow.className = 'category-arrow';
+    arrow.textContent = isCollapsed ? '▶' : '▼';
+    header.appendChild(arrow);
+
+    // Evento toggle al hacer clic en el header
+    header.addEventListener('click', () => {
+      toggleCategory(section, header, arrow, category.id);
+    });
+
+    // También con teclado (accesibilidad)
+    header.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleCategory(section, header, arrow, category.id);
+      }
+    });
+
     section.appendChild(header);
+
+    // --- LISTA de módulos (contenido colapsable) ---
+    const listWrapper = document.createElement('div');
+    listWrapper.className = 'category-modules-wrapper';
+    if (isCollapsed) listWrapper.classList.add('collapsed');
 
     const list = document.createElement('div');
     list.className = 'module-list';
@@ -75,9 +141,26 @@ export function renderModulesByCategory(container, modules, categories, currency
         list.appendChild(card);
       });
     }
-    section.appendChild(list);
+
+    listWrapper.appendChild(list);
+    section.appendChild(listWrapper);
     container.appendChild(section);
   }
+}
+
+function toggleCategory(section, header, arrow, categoryId) {
+  const wrapper = section.querySelector('.category-modules-wrapper');
+  const isCollapsed = wrapper.classList.toggle('collapsed');
+  
+  header.setAttribute('aria-expanded', !isCollapsed);
+  arrow.textContent = isCollapsed ? '▶' : '▼';
+  
+  if (isCollapsed) {
+    collapsedCategories.add(categoryId);
+  } else {
+    collapsedCategories.delete(categoryId);
+  }
+  saveCollapsedState();
 }
 
 export function createAdminModuleCard(module, onDelete, onEdit) {
@@ -132,6 +215,7 @@ export function renderAdminModulesByCategory(container, modules, categories, onD
     container.appendChild(msg);
     return;
   }
+
   const grouped = {};
   categories.forEach(cat => {
     grouped[cat.id] = {
@@ -139,12 +223,14 @@ export function renderAdminModulesByCategory(container, modules, categories, onD
       modules: modules.filter(m => m.category_id === cat.id) || []
     };
   });
+
   for (const catId in grouped) {
     const { category, modules: mods } = grouped[catId];
     const section = document.createElement('div');
     section.className = 'category-section';
     section.dataset.categoryId = category.id;
 
+    // En modo administración, las categorías SIEMPRE están expandidas
     const header = document.createElement('div');
     header.className = 'category-header';
 
@@ -194,4 +280,38 @@ export function renderAdminModulesByCategory(container, modules, categories, onD
     section.appendChild(list);
     container.appendChild(section);
   }
+}
+
+// Función para colapsar todas las categorías
+export function collapseAllCategories() {
+  document.querySelectorAll('.category-section').forEach(section => {
+    const categoryId = section.dataset.categoryId;
+    if (categoryId && !collapsedCategories.has(categoryId)) {
+      collapsedCategories.add(categoryId);
+      const wrapper = section.querySelector('.category-modules-wrapper');
+      const arrow = section.querySelector('.category-arrow');
+      const header = section.querySelector('.category-header');
+      if (wrapper) wrapper.classList.add('collapsed');
+      if (arrow) arrow.textContent = '▶';
+      if (header) header.setAttribute('aria-expanded', 'false');
+    }
+  });
+  saveCollapsedState();
+}
+
+// Función para expandir todas las categorías
+export function expandAllCategories() {
+  document.querySelectorAll('.category-section').forEach(section => {
+    const categoryId = section.dataset.categoryId;
+    if (categoryId && collapsedCategories.has(categoryId)) {
+      collapsedCategories.delete(categoryId);
+      const wrapper = section.querySelector('.category-modules-wrapper');
+      const arrow = section.querySelector('.category-arrow');
+      const header = section.querySelector('.category-header');
+      if (wrapper) wrapper.classList.remove('collapsed');
+      if (arrow) arrow.textContent = '▼';
+      if (header) header.setAttribute('aria-expanded', 'true');
+    }
+  });
+  saveCollapsedState();
 }
